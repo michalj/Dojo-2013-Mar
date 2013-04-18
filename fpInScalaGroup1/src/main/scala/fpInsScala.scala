@@ -22,6 +22,21 @@ object chapter3 extends App {
       case x::xs => if(pred(x)) dropWhile(xs)(pred) else l
     }
   }
+  
+  // Exercise 5
+  def setHead[T](l: List[T], newHead: T) = {
+    newHead :: tail(l)
+  }
+  
+  // Exercise 6  
+  def init[A](l: List[A]) : List[A] = l match {
+      case Nil => Nil
+      case _ :: Nil => Nil
+      case x :: xs => x::init(xs)
+  }                                               //> init: [A](l: List[A])List[A]
+
+  // Exercise 10
+  def length[A](l: List[A]): Int = l.foldRight(0)((_, c) => c + 1)
 
   val dropWhileForThisList = dropWhile( List(33345,4,5,3)) _
 
@@ -38,6 +53,16 @@ object chapter3 extends App {
   println(dropWhile(List(1,2,3,4,5)) ((x: Int) => x < 3))
 
   def lessThanThree(n : Int) = n < 3
+  
+  
+  def foldLeft[A,B] (l: List[A], z: B)(f: (B,A) => B): B = {
+    l match {
+      case Nil => z
+      case x :: xs => foldLeft( xs, f(z, x))(f)
+    }
+    
+  }
+  
         
 
 }

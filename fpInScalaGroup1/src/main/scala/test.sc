@@ -12,5 +12,10 @@ object test {
   length(l)                                       //> res3: Int = 3
   length(Nil)                                     //> res4: Int = 0
   
-  foldLeft(l, 0.0)((a, e) => a * 1.0 + e)         //> res5: Double = 6.0
+  foldLeft((1 to 1000000).toList, 0.0)((a, e) => a * 1.0 + e)
+                                                  //> res5: Double = 5.000005E11
+  reverse(l)                                      //> res6: List[Int] = List(3, 2, 1)
+  
+  foldLeft2(l, 0)((a, e) => a * 10 + e)           //> res7: Int = 123
+  l.foldRight(0)((e, a) => a * 10 + e)            //> res8: Int = 321
 }

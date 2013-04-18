@@ -1,4 +1,6 @@
 
+import scala.annotation.tailrec
+
 object chapter3 extends App {
 
   // Exercise 2
@@ -54,13 +56,25 @@ object chapter3 extends App {
 
   def lessThanThree(n : Int) = n < 3
   
-  
+  // Exercise 11
+  @tailrec
   def foldLeft[A,B] (l: List[A], z: B)(f: (B,A) => B): B = {
     l match {
       case Nil => z
       case x :: xs => foldLeft( xs, f(z, x))(f)
     }
-    
+  }
+  
+  // Exercise 13
+  def reverse[T](l: List[T]): List[T] = {
+    foldLeft(l, Nil : List[T])( (acc, x) => x :: acc)
+  }
+  
+  // Exercise 14
+  def foldLeft2[A,B](l: List[A], z:B)(f: (B,A) =>B): B = {
+    def ident(x: B): B = x
+    val g = l.foldRight(ident _)((e, a) => x => a(f(x, e)))
+    g(z)
   }
   
         
